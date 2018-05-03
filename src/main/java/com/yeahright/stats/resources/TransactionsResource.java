@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class TransactionsResource {
   @GET
   @Timed
-  public Stats lastMinuteStas() {
+  public Stats lastMinuteStats() {
     return new Stats(123);
   }
 
