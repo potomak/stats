@@ -17,4 +17,18 @@ public class Stats {
   public long getCount() {
     return count;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
+    }
+
+    if (obj instanceof Stats) {
+      final Stats s = (Stats) obj;
+      return getCount() == s.getCount();
+    }
+
+    return false;
+  }
 }
