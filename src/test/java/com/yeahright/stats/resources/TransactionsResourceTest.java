@@ -4,11 +4,8 @@ import com.yeahright.stats.api.Stats;
 import com.yeahright.stats.api.Transaction;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.dropwizard.testing.junit.ResourceTestRule;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
