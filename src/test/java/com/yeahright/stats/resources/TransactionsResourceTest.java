@@ -1,5 +1,6 @@
 package com.yeahright.stats.resources;
 
+import com.yeahright.stats.StatsData;
 import com.yeahright.stats.api.Stats;
 import com.yeahright.stats.api.Transaction;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,9 +19,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Unit tests for {@link TransactionsResource}.
  */
 public class TransactionsResourceTest {
+  public static final StatsData sd = new StatsData();
   @ClassRule
   public static final ResourceTestRule RESOURCES = ResourceTestRule.builder()
-      .addResource(new TransactionsResource())
+      .addResource(new TransactionsResource(sd))
       .build();
 
   @Test
@@ -48,7 +50,9 @@ public class TransactionsResourceTest {
 
   @Test
   public void lastMinuteStats() throws Exception {
-    final Stats stats = new Stats(123);
+    final long now = System.currentTimeMillis();
+    final Transaction t = new Transaction(123.4, now);
+    final Stats stats = new Stats(t);
     final Stats response = RESOURCES.target("/transactions")
         .request().get(new GenericType<Stats>() {});
 

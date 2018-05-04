@@ -6,20 +6,21 @@ import io.dropwizard.setup.Environment;
 import com.yeahright.stats.resources.TransactionsResource;
 
 public class StatsApplication extends Application<StatsConfiguration> {
-    public static void main(String[] args) throws Exception {
-      new StatsApplication().run(args);
-    }
+  private StatsData sd;
 
-    @Override
-    public void initialize(Bootstrap<StatsConfiguration> bootstrap) {
-      // nothing to do yet
-    }
+  public static void main(String[] args) throws Exception {
+    new StatsApplication().run(args);
+  }
 
-    @Override
-    public void run(StatsConfiguration configuration,
-                    Environment environment) {
-      final TransactionsResource resource = new TransactionsResource();
-      environment.jersey().register(resource);
-    }
+  @Override
+  public void initialize(Bootstrap<StatsConfiguration> bootstrap) {
+    this.sd = new StatsData();
+  }
 
+  @Override
+  public void run(StatsConfiguration configuration,
+                  Environment environment) {
+    final TransactionsResource resource = new TransactionsResource(this.sd);
+    environment.jersey().register(resource);
+  }
 }
